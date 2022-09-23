@@ -16,5 +16,9 @@ let Render (state: AppState) dispatch =
     Html.button [
       prop.text "Date Only Test"
       prop.onClick (fun _ -> GetDateOnlyRequest |> dispatch)
+    ]    
+    Html.button [
+      prop.text "Persona Test"
+      prop.onClick (fun _ -> GetPersonaRequest |> dispatch)
     ]
   ]

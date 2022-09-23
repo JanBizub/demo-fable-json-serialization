@@ -1,6 +1,7 @@
 ﻿module Types
 
 open System
+open Project.Domain
 
 [<RequireQualifiedAccess>]
 type Route =
@@ -19,5 +20,8 @@ type AppState =
 type Msg =
     | GetDateOnlyRequest
     | GetDateOnlyResponse of DateOnly
+    
+    | GetPersonaRequest
+    | GetPersonaResponse of Persona
     
     | HttpError of exn

@@ -9,14 +9,19 @@ open Microsoft.Extensions.Logging
 open Microsoft.Extensions.DependencyInjection
 open Giraffe
 open Microsoft.Extensions.Configuration
-open DateOnlyCoderBe
 open Thoth.Json.Giraffe
 open Thoth.Json.Net
+open DateOnlyCoderBe
+open Project.Domain
 
 let webApp =
     choose [ GET
              >=> route "/api/getdateonly"
-             >=> DemoHandler.getDateOnly () ]
+             >=> DemoHandler.getDateOnly ()
+
+             GET
+             >=> route "/api/getpersona"
+             >=> DemoHandler.getPersona () ]
 
 /// Ignore the passed value. This is often used to throw away results of a computation.
 let (!) f = f |> ignore
@@ -47,7 +52,7 @@ let configureServices (context: WebHostBuilderContext) (services: IServiceCollec
         |> Extra.withCustom Encode.dateonly Decode.dateonly
 
     ! services.AddSingleton<Json.ISerializer>(ThothSerializer(extra = myExtra))
-    
+
     ! services.AddGiraffe()
 
 
