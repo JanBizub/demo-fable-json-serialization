@@ -46,4 +46,24 @@ let getPbs () =
                  TotalRequestsCount = 11 }
             
             return! json pbs next ctx
-        }   
+        }
+        
+let getPbsMenu () =
+        fun (next: HttpFunc) (ctx: HttpContext) ->
+        task {
+            let pbseMenuItems = [
+                { Id = Guid.NewGuid(); Level = 1; Name = "Name"; Code = "Code"; OpenRequestsCount = 0; TotalRequestsCount = 0 }
+                { Id = Guid.NewGuid(); Level = 2; Name = "Name"; Code = "Code"; OpenRequestsCount = 0; TotalRequestsCount = 0 }
+                { Id = Guid.NewGuid(); Level = 2; Name = "Name"; Code = "Code"; OpenRequestsCount = 0; TotalRequestsCount = 0 }
+                { Id = Guid.NewGuid(); Level = 3; Name = "Name"; Code = "Code"; OpenRequestsCount = 0; TotalRequestsCount = 0 }
+                { Id = Guid.NewGuid(); Level = 3; Name = "Name"; Code = "Code"; OpenRequestsCount = 0; TotalRequestsCount = 0 }
+                { Id = Guid.NewGuid(); Level = 2; Name = "Name"; Code = "Code"; OpenRequestsCount = 0; TotalRequestsCount = 0 }
+                { Id = Guid.NewGuid(); Level = 3; Name = "Name"; Code = "Code"; OpenRequestsCount = 0; TotalRequestsCount = 0 }
+                { Id = Guid.NewGuid(); Level = 4; Name = "Name"; Code = "Code"; OpenRequestsCount = 0; TotalRequestsCount = 0 }
+                { Id = Guid.NewGuid(); Level = 2; Name = "Name"; Code = "Code"; OpenRequestsCount = 0; TotalRequestsCount = 0 }
+            ]
+            
+            let pbsMenu = PbsOperations.createMenu pbseMenuItems
+            
+            return! json pbsMenu next ctx
+        }

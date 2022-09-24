@@ -24,7 +24,11 @@ let webApp =
              
              GET
              >=> route "/api/getpbs"
-             >=> DemoHandler.getPbs () ]
+             >=> DemoHandler.getPbs ()
+             
+             GET
+             >=> route "/api/getpbsmenu"
+             >=> DemoHandler.getPbsMenu () ]
 
 /// Ignore the passed value. This is often used to throw away results of a computation.
 let (!) f = f |> ignore

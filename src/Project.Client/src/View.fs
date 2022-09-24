@@ -25,6 +25,10 @@ let Render (state: AppState) dispatch =
       prop.text "Pbs Test"
       prop.onClick (fun _ -> GetPbsRequest |> dispatch)
     ]
+    Html.button [
+      prop.text "Pbs Menu Test"
+      prop.onClick (fun _ -> GetPbsMenuRequest |> dispatch)
+    ]
     
     Html.p [ prop.text "POST TESTS" ]
 

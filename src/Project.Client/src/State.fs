@@ -36,6 +36,14 @@ let update msg (state: AppState) =
     | GetPbsResponse pbs ->
         console.log pbs
         { state with Pbs = Some pbs }, Cmd.none
+        
+        
+    | GetPbsMenuRequest ->
+        state, Cmd.OfPromise.either HttpRequests.getPbsTest () GetPbsResponse HttpError
+    
+    | GetPbsMenuResponse pbsMenu ->
+        console.log pbsMenu
+        { state with PbsMenu = Some pbsMenu }, Cmd.none
 
     
     | HttpError exn -> { state with ErrorMessage = $"Error: {exn.Message}" |> Some }, Cmd.none

@@ -37,3 +37,11 @@ let getPbsTest () : JS.Promise<Pbs> =
 
         return! Fetch.get (url)
     }
+    
+let getPbsMenu () : JS.Promise<PbsMenu> =
+    promise {
+        let url =
+            "https://localhost:55784/api/getpbsmenu"
+
+        return! Fetch.get (url)
+    }
