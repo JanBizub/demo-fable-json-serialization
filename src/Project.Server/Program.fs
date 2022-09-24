@@ -12,7 +12,6 @@ open Microsoft.Extensions.Configuration
 open Thoth.Json.Giraffe
 open Thoth.Json.Net
 open DateOnlyCoderBe
-open Project.Domain
 
 let webApp =
     choose [ GET
@@ -21,7 +20,11 @@ let webApp =
 
              GET
              >=> route "/api/getpersona"
-             >=> DemoHandler.getPersona () ]
+             >=> DemoHandler.getPersona ()
+             
+             GET
+             >=> route "/api/getpbs"
+             >=> DemoHandler.getPbs () ]
 
 /// Ignore the passed value. This is often used to throw away results of a computation.
 let (!) f = f |> ignore

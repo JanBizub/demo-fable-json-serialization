@@ -19,3 +19,31 @@ let getPersona () =
             
             return! json persona next ctx
         }
+        
+let getPbs () =
+    fun (next: HttpFunc) (ctx: HttpContext) ->
+        task {
+            let pbs =  {
+                 Id = Guid.Empty
+                 PbsStatus = PbsStatus.Active(ActivePbsStatus.Accepted)
+                 Name = "Name of pbs"
+                 NameOnly = "Descrioption of pbs"
+                 Code = "CPY.CODE"
+                 PbsCode = "Code of project"
+                 Description = "Descriptop"
+                 DescriptionCustomer = Some "Customer description"
+                 SortKey = "xxx"
+                 Level = 1
+                 ModifiedOn = ""
+                 ModifiedBy = None
+                 Role = Some {Id = Guid.Empty; Name = "test"}
+                 ProjectService= Some {Id = Guid.Empty; Name = "test"}
+                 ProjectServiceModule = Some {Id = Guid.Empty; Name = "test"}
+                 AssignedToCustomer= Some {Id = Guid.Empty; Name = "test"}
+                 AssignedTo= Some {Id = Guid.Empty; Name = "test"}
+                 ParentPbsId = None
+                 OpenRequestsCount= 10
+                 TotalRequestsCount = 11 }
+            
+            return! json pbs next ctx
+        }   

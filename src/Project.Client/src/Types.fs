@@ -10,11 +10,15 @@ type Route =
 
 type AppState =
     { CurrentRoute: Route
-      Cars: string list
+      DateOnly: DateOnly option
+      Persona: Persona option
+      Pbs: Pbs option
       ErrorMessage: string option }
     static member Empty =
         { CurrentRoute = Route.Root
-          Cars = []
+          DateOnly = None
+          Persona = None
+          Pbs = None
           ErrorMessage = None }
 
 type Msg =
@@ -23,5 +27,8 @@ type Msg =
     
     | GetPersonaRequest
     | GetPersonaResponse of Persona
+    
+    | GetPbsRequest
+    | GetPbsResponse of Pbs
     
     | HttpError of exn

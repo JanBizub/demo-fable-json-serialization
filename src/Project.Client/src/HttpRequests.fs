@@ -29,3 +29,11 @@ let getPersonTest () : JS.Promise<Persona> =
 
         return! Fetch.get (url, extra = extra)
     }
+    
+let getPbsTest () : JS.Promise<Pbs> =
+    promise {
+        let url =
+            "https://localhost:55784/api/getpbs"
+
+        return! Fetch.get (url)
+    }

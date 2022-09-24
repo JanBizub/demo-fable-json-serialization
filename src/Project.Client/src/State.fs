@@ -20,15 +20,22 @@ let update msg (state: AppState) =
 
     | GetDateOnlyResponse dateOnly ->
         console.log dateOnly
-        state, Cmd.none
+        { state with DateOnly = Some dateOnly }, Cmd.none
 
 
     | GetPersonaRequest -> state, Cmd.OfPromise.either HttpRequests.getPersonTest () GetPersonaResponse HttpError
 
-
     | GetPersonaResponse persona ->
         console.log persona
-        state, Cmd.none
+        { state with Persona = Some persona }, Cmd.none
 
+    
+    | GetPbsRequest ->
+        state, Cmd.OfPromise.either HttpRequests.getPbsTest () GetPbsResponse HttpError
+    
+    | GetPbsResponse pbs ->
+        console.log pbs
+        { state with Pbs = Some pbs }, Cmd.none
 
+    
     | HttpError exn -> { state with ErrorMessage = $"Error: {exn.Message}" |> Some }, Cmd.none
