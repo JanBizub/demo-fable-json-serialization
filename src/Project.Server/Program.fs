@@ -11,7 +11,7 @@ open Giraffe
 open Microsoft.Extensions.Configuration
 open Thoth.Json.Giraffe
 open Thoth.Json.Net
-open DateOnlyCoderBe
+open Project.Domain
 
 let webApp =
     choose [ GET

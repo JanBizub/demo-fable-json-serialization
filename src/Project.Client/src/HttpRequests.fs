@@ -5,7 +5,6 @@ open System
 open Fable.Core
 open Thoth.Fetch
 open Thoth.Json
-open DateOnlyCoderFe
 open Project.Domain
 
 let getDateOnlyTest () : JS.Promise<DateOnly> =

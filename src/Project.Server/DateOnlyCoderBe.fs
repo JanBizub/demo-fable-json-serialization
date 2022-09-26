@@ -3,6 +3,7 @@
 open System
 open Thoth.Json.Net
 
+// todo: code / decode ISO format
 module Decode =
     let dateonly : Decoder<DateOnly> =
         fun path value ->
