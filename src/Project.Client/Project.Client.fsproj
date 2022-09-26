@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
-		 <DefineConstants>FABLE_COMPILER</DefineConstants>
+	    <DefineConstants>FABLE_COMPILER</DefineConstants>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
     </PropertyGroup>
 
