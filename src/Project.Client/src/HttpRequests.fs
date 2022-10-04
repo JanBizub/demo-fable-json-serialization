@@ -1,46 +1,89 @@
 ﻿[<RequireQualifiedAccess>]
 module HttpRequests
 
+open Elmish
 open System
-open Fable.Core
-open Thoth.Fetch
-open Thoth.Json
+open Types
+open Fable.SimpleHttp
+open Fable.SimpleJson
 open Project.Domain
 
-let getDateOnlyTest () : JS.Promise<DateOnly> =
-    promise {
-        let url =
-            "https://localhost:55784/api/getdateonly"
-
-        let extra =
-            Extra.empty
-            |> Extra.withCustom Encode.dateonly Decode.dateonly
-
-        return! Fetch.get (url, extra = extra)
+let getDateOnlyTest () =
+    async {
+        let! response =
+            Http.request "https://localhost:55784/api/getdateonly"
+            |> Http.method GET
+            |> Http.header (Headers.contentType "application/json")
+            |> Http.send
+        
+        match response.statusCode with
+        | 200 ->
+            return
+                response.responseText
+                |> Json.parseAs<DateOnly>
+                |> Ok
+        | _ -> 
+            return
+                (response.statusCode, response.responseText)
+                |> Error
     }
 
-let getPersonTest () : JS.Promise<Persona> =
-    promise {
-        let url =
-            "https://localhost:55784/api/getpersona"
-
-        let extra = Extra.empty |> Extra.withDecimal
-
-        return! Fetch.get (url, extra = extra)
+let getPersonTest () =
+    async {
+        let! response =
+            Http.request "https://localhost:55784/api/getpersona"
+            |> Http.method GET
+            |> Http.header (Headers.contentType "application/json")
+            |> Http.send
+        
+        match response.statusCode with
+        | 200 ->
+            return
+                response.responseText
+                |> Json.parseAs<Persona>
+                |> Ok
+        | _ -> 
+            return
+                (response.statusCode, response.responseText)
+                |> Error
     }
     
-let getPbsTest () : JS.Promise<Pbs> =
-    promise {
-        let url =
-            "https://localhost:55784/api/getpbs"
-
-        return! Fetch.get (url)
+let getPbsTest () =
+    async {
+        let! response =
+            Http.request "https://localhost:55784/api/getpersona"
+            |> Http.method GET
+            |> Http.header (Headers.contentType "application/json")
+            |> Http.send
+        
+        match response.statusCode with
+        | 200 ->
+            return
+                response.responseText
+                |> Json.parseAs<Pbs>
+                |> Ok
+        | _ -> 
+            return
+                (response.statusCode, response.responseText)
+                |> Error
     }
     
-let getPbsMenu () : JS.Promise<PbsMenu> =
-    promise {
-        let url =
-            "https://localhost:55784/api/getpbsmenu"
-
-        return! Fetch.get (url)
+let getPbsMenu () =
+    async {
+        let! response =
+            Http.request "https://localhost:55784/api/getpbsmenu"
+            |> Http.method GET
+            |> Http.header (Headers.contentType "application/json")
+            |> Http.send
+        
+        match response.statusCode with
+        | 200 ->
+            return
+                response.responseText
+                |> Json.parseAs<PbsMenu>
+                |> Ok
+        | _ -> 
+            return
+                (response.statusCode, response.responseText)
+                |> Error
     }

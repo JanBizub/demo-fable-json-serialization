@@ -23,17 +23,22 @@ type AppState =
           PbsMenu = None
           ErrorMessage = None }
 
+type HttpStatusCode = int
+type ErrorMessage = string
+type HttpError = HttpStatusCode * ErrorMessage
+
+
 type Msg =
     | GetDateOnlyRequest
-    | GetDateOnlyResponse of DateOnly
+    | GetDateOnlyResponse of Result<DateOnly, HttpError>
     
     | GetPersonaRequest
-    | GetPersonaResponse of Persona
+    | GetPersonaResponse of Result<Persona, HttpError>
     
     | GetPbsRequest
-    | GetPbsResponse of Pbs
+    | GetPbsResponse of Result<Pbs, HttpError>
     
     | GetPbsMenuRequest
-    | GetPbsMenuResponse of PbsMenu
+    | GetPbsMenuResponse of Result<PbsMenu, HttpError>
     
     | HttpError of exn

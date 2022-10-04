@@ -9,9 +9,8 @@ open Microsoft.Extensions.Logging
 open Microsoft.Extensions.DependencyInjection
 open Giraffe
 open Microsoft.Extensions.Configuration
-open Thoth.Json.Giraffe
-open Thoth.Json.Net
-open Project.Domain
+open System.Text.Json
+open System.Text.Json.Serialization
 
 let webApp =
     choose [ GET
@@ -53,12 +52,10 @@ let configureServices (context: WebHostBuilderContext) (services: IServiceCollec
 
     // Configure JSON serialization --------------------------------------------------------------------------------------
     // https://thoth-org.github.io/Thoth.Json/documentation/auto/json-representation.html#extra-coders
-    let myExtra =
-        Extra.empty
-        |> Extra.withDecimal
-        |> Extra.withCustom Encode.dateonly Decode.dateonly
-
-    ! services.AddSingleton<Json.ISerializer>(ThothSerializer(extra = myExtra))
+    let jsonOptions = JsonSerializerOptions()
+    jsonOptions.Converters.Add(JsonFSharpConverter())
+    ! services.AddSingleton(jsonOptions)
+    ! services.AddSingleton<Json.ISerializer, SystemTextJson.Serializer>()
 
     ! services.AddGiraffe()
 
