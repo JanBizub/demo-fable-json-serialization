@@ -15,6 +15,7 @@ type Gender =
 
 type Persona =
     { PersonType: Alignment
+      BirthDay: DateOnly
       Money: decimal option
       GenderTransition: Result<Gender, exn> }
     

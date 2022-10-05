@@ -1,0 +1,27 @@
+### POST postdateonly
+POST https://localhost:55784/api/postdateonly
+Accept: application/json
+content-type: application/json
+
+"2022-11-11"
+
+### POST postpersona
+POST https://localhost:55784/api/postpersona
+Accept: application/json
+content-type: application/json
+
+{"PersonType":"Evil","BirthDay":"1989-11-11","Money":155,"GenderTransition":["Ok","Whatever"]}
+
+### POST postpbs
+POST https://localhost:55784/api/postpbs
+Accept: application/json
+content-type: application/json
+
+{"Id":"00000000-0000-0000-0000-000000000000","PbsStatus":["Active","Accepted"],"Name":"Name of pbs","NameOnly":"Descrioption of pbs","Code":"CPY.CODE","PbsCode":"Code of project","Description":"Descriptop","DescriptionCustomer":"Customer description","SortKey":"xxx","Level":1,"ModifiedOn":"","ModifiedBy":null,"Role":{"Id":"00000000-0000-0000-0000-000000000000","Name":"test"},"ProjectService":{"Id":"00000000-0000-0000-0000-000000000000","Name":"test"},"ProjectServiceModule":{"Id":"00000000-0000-0000-0000-000000000000","Name":"test"},"AssignedToCustomer":{"Id":"00000000-0000-0000-0000-000000000000","Name":"test"},"AssignedTo":{"Id":"00000000-0000-0000-0000-000000000000","Name":"test"},"ParentPbsId":null,"OpenRequestsCount":10,"TotalRequestsCount":11}
+
+### POST postpbsmenu
+POST https://localhost:55784/api/postpbsmenu
+Accept: application/json
+content-type: application/json
+
+{"Parent":{"Id":"00000000-0000-0000-0000-000000000000","Level":0,"Name":"root","Code":"root","OpenRequestsCount":0,"TotalRequestsCount":0},"Children":[{"Parent":{"Id":"535d2846-0535-4115-86b6-17057ff0237f","Level":1,"Name":"Name","Code":"Code","OpenRequestsCount":0,"TotalRequestsCount":0},"Children":[{"Parent":{"Id":"4b6a04bb-e1d6-4662-9355-6e71721512f7","Level":2,"Name":"Name","Code":"Code","OpenRequestsCount":0,"TotalRequestsCount":0},"Children":[]},{"Parent":{"Id":"fcc77682-8b55-434b-9c7b-e8040a1baeae","Level":2,"Name":"Name","Code":"Code","OpenRequestsCount":0,"TotalRequestsCount":0},"Children":[{"Parent":{"Id":"d53b8b8b-3be8-4d54-a75d-41596f74bc6b","Level":3,"Name":"Name","Code":"Code","OpenRequestsCount":0,"TotalRequestsCount":0},"Children":[]},{"Parent":{"Id":"71af3632-dedf-441c-abea-7007450adda0","Level":3,"Name":"Name","Code":"Code","OpenRequestsCount":0,"TotalRequestsCount":0},"Children":[]}]},{"Parent":{"Id":"271a7e51-454a-4fae-8d69-5a6599fb29ae","Level":2,"Name":"Name","Code":"Code","OpenRequestsCount":0,"TotalRequestsCount":0},"Children":[{"Parent":{"Id":"0901298d-1b78-44ef-a655-b2510904ad7e","Level":3,"Name":"Name","Code":"Code","OpenRequestsCount":0,"TotalRequestsCount":0},"Children":[{"Parent":{"Id":"cdd0708e-797a-4dac-944a-41e1c89adb70","Level":4,"Name":"Name","Code":"Code","OpenRequestsCount":0,"TotalRequestsCount":0},"Children":[]}]}]},{"Parent":{"Id":"03c20d85-6cf8-4795-9e4d-acb9d379db34","Level":2,"Name":"Name","Code":"Code","OpenRequestsCount":0,"TotalRequestsCount":0},"Children":[]}]}]}

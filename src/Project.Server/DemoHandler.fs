@@ -15,7 +15,7 @@ let getDateOnly () =
 let getPersona () =
     fun (next: HttpFunc) (ctx: HttpContext) ->
         task {
-            let persona = { PersonType = Evil; Money = Some 155m; GenderTransition = Ok Whatever }
+            let persona = { PersonType = Evil; BirthDay = DateOnly(1989, 11, 11); Money = Some 155m; GenderTransition = Ok Whatever }
             
             return! json persona next ctx
         }
@@ -49,21 +49,55 @@ let getPbs () =
         }
         
 let getPbsMenu () =
-        fun (next: HttpFunc) (ctx: HttpContext) ->
+    fun (next: HttpFunc) (ctx: HttpContext) ->
+    task {
+        let pbseMenuItems = [
+            { Id = Guid.NewGuid(); Level = 1; Name = "Name"; Code = "Code"; OpenRequestsCount = 0; TotalRequestsCount = 0 }
+            { Id = Guid.NewGuid(); Level = 2; Name = "Name"; Code = "Code"; OpenRequestsCount = 0; TotalRequestsCount = 0 }
+            { Id = Guid.NewGuid(); Level = 2; Name = "Name"; Code = "Code"; OpenRequestsCount = 0; TotalRequestsCount = 0 }
+            { Id = Guid.NewGuid(); Level = 3; Name = "Name"; Code = "Code"; OpenRequestsCount = 0; TotalRequestsCount = 0 }
+            { Id = Guid.NewGuid(); Level = 3; Name = "Name"; Code = "Code"; OpenRequestsCount = 0; TotalRequestsCount = 0 }
+            { Id = Guid.NewGuid(); Level = 2; Name = "Name"; Code = "Code"; OpenRequestsCount = 0; TotalRequestsCount = 0 }
+            { Id = Guid.NewGuid(); Level = 3; Name = "Name"; Code = "Code"; OpenRequestsCount = 0; TotalRequestsCount = 0 }
+            { Id = Guid.NewGuid(); Level = 4; Name = "Name"; Code = "Code"; OpenRequestsCount = 0; TotalRequestsCount = 0 }
+            { Id = Guid.NewGuid(); Level = 2; Name = "Name"; Code = "Code"; OpenRequestsCount = 0; TotalRequestsCount = 0 }
+        ]
+        
+        let pbsMenu = PbsOperations.createMenu pbseMenuItems
+        
+        return! json pbsMenu next ctx
+    }
+
+
+
+let postDateOnly () =
+    fun (next: HttpFunc) (ctx: HttpContext) -> 
         task {
-            let pbseMenuItems = [
-                { Id = Guid.NewGuid(); Level = 1; Name = "Name"; Code = "Code"; OpenRequestsCount = 0; TotalRequestsCount = 0 }
-                { Id = Guid.NewGuid(); Level = 2; Name = "Name"; Code = "Code"; OpenRequestsCount = 0; TotalRequestsCount = 0 }
-                { Id = Guid.NewGuid(); Level = 2; Name = "Name"; Code = "Code"; OpenRequestsCount = 0; TotalRequestsCount = 0 }
-                { Id = Guid.NewGuid(); Level = 3; Name = "Name"; Code = "Code"; OpenRequestsCount = 0; TotalRequestsCount = 0 }
-                { Id = Guid.NewGuid(); Level = 3; Name = "Name"; Code = "Code"; OpenRequestsCount = 0; TotalRequestsCount = 0 }
-                { Id = Guid.NewGuid(); Level = 2; Name = "Name"; Code = "Code"; OpenRequestsCount = 0; TotalRequestsCount = 0 }
-                { Id = Guid.NewGuid(); Level = 3; Name = "Name"; Code = "Code"; OpenRequestsCount = 0; TotalRequestsCount = 0 }
-                { Id = Guid.NewGuid(); Level = 4; Name = "Name"; Code = "Code"; OpenRequestsCount = 0; TotalRequestsCount = 0 }
-                { Id = Guid.NewGuid(); Level = 2; Name = "Name"; Code = "Code"; OpenRequestsCount = 0; TotalRequestsCount = 0 }
-            ]
-            
-            let pbsMenu = PbsOperations.createMenu pbseMenuItems
-            
-            return! json pbsMenu next ctx
-        }
+            let! data = ctx.BindModelAsync<DateOnly>()
+
+            return! json data next ctx
+    }
+
+let postPersona () =
+    fun (next: HttpFunc) (ctx: HttpContext) -> 
+        task {
+            let! data = ctx.BindModelAsync<Persona>()
+
+            return! json data next ctx
+    }
+
+let postPbs () =
+    fun (next: HttpFunc) (ctx: HttpContext) -> 
+        task {
+            let! data = ctx.BindModelAsync<Pbs>()
+
+            return! json data next ctx
+    }
+
+let postPbsMenu () =
+    fun (next: HttpFunc) (ctx: HttpContext) -> 
+        task {
+            let! data = ctx.BindModelAsync<PbsMenu>()
+
+            return! json data next ctx
+    }

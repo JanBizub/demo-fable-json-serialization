@@ -27,7 +27,25 @@ let webApp =
              
              GET
              >=> route "/api/getpbsmenu"
-             >=> DemoHandler.getPbsMenu () ]
+             >=> DemoHandler.getPbsMenu ()
+             
+             
+             POST
+             >=> route "/api/postdateonly"
+             >=> DemoHandler.postDateOnly ()
+
+             POST
+             >=> route "/api/postpersona"
+             >=> DemoHandler.postPersona ()
+             
+             POST
+             >=> route "/api/postpbs"
+             >=> DemoHandler.postPbs ()
+
+             POST
+             >=> route "/api/postpbsmenu"
+             >=> DemoHandler.postPbsMenu ()
+             ]
 
 /// Ignore the passed value. This is often used to throw away results of a computation.
 let (!) f = f |> ignore
@@ -53,7 +71,7 @@ let configureServices (context: WebHostBuilderContext) (services: IServiceCollec
 
     let jsonOptions = JsonSerializerOptions()
     jsonOptions.Converters.Add(JsonFSharpConverter(
-        unionEncoding = ( JsonUnionEncoding.UnwrapFieldlessTags )
+        unionEncoding = ( JsonUnionEncoding.ThothLike ||| JsonUnionEncoding.UnwrapOption)
     ))
     ! services.AddSingleton(jsonOptions)
     ! services.AddSingleton<Json.ISerializer, SystemTextJson.Serializer>()
