@@ -15,35 +15,38 @@ let init result =
 
 let update msg (state: AppState) =
     match msg with
-    | GetDateOnlyRequest -> state, Cmd.OfAsync.either HttpRequests.getDateOnlyTest () GetDateOnlyResponse HttpError
+    | GetDateOnlyRequest -> { state with ErrorMessage = None }, Cmd.OfPromise.either HttpRequests.getDateOnlyTest () GetDateOnlyResponse HttpError
+
 
     | GetDateOnlyResponse dateOnly ->
         console.log dateOnly
-        { state with DateOnly = None}, Cmd.none
+        { state with DateOnly = Some dateOnly }, Cmd.none
 
 
-    | GetPersonaRequest -> state, Cmd.OfAsync.either HttpRequests.getPersonTest () GetPersonaResponse HttpError
-    
+    | GetPersonaRequest -> { state with ErrorMessage = None }, Cmd.OfPromise.either HttpRequests.getPersonTest () GetPersonaResponse HttpError
+
+
     | GetPersonaResponse persona ->
         console.log persona
-        { state with Persona = None }, Cmd.none
+        { state with Persona = Some persona }, Cmd.none
 
     
     | GetPbsRequest ->
-        state, Cmd.OfAsync.either HttpRequests.getPbsTest () GetPbsResponse HttpError
+        { state with ErrorMessage = None }, Cmd.OfPromise.either HttpRequests.getPbsTest () GetPbsResponse HttpError
     
+
     | GetPbsResponse pbs ->
         console.log pbs
-        { state with Pbs = None }, Cmd.none
+        { state with Pbs = Some pbs }, Cmd.none
         
         
     | GetPbsMenuRequest ->
-        state, Cmd.OfAsync.either HttpRequests.getPbsMenu () GetPbsMenuResponse HttpError
+        { state with ErrorMessage = None }, Cmd.OfPromise.either HttpRequests.getPbsMenu () GetPbsMenuResponse HttpError
     
+
     | GetPbsMenuResponse pbsMenu ->
         console.log pbsMenu
-        { state with PbsMenu = None }, Cmd.none
+        { state with PbsMenu = Some pbsMenu }, Cmd.none
 
     
-    | HttpError exn ->
-        { state with ErrorMessage = $"Error: HTTP: {exn.Message}" |> Some }, Cmd.none
+    | HttpError exn -> { state with ErrorMessage = $"Error: {exn.Message}" |> Some }, Cmd.none

@@ -30,6 +30,10 @@ let Render (state: AppState) dispatch =
       prop.onClick (fun _ -> GetPbsMenuRequest |> dispatch)
     ]
     
-    Html.p [ prop.text "POST TESTS" ]
+    Html.p [ prop.text $"DateOnly: {state.DateOnly}"]
+    Html.p [ prop.text $"DateOnly: {state.Persona}"]
+    Html.p [ prop.text $"DateOnly: {state.Pbs}"]
+    Html.p [ prop.text $"DateOnly: {state.PbsMenu}"]
 
+    Html.p [ prop.text "POST TESTS" ]
   ]

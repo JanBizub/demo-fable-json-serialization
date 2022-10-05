@@ -50,12 +50,14 @@ let configureServices (context: WebHostBuilderContext) (services: IServiceCollec
 
         )))
 
-    // Configure JSON serialization --------------------------------------------------------------------------------------
-    // https://thoth-org.github.io/Thoth.Json/documentation/auto/json-representation.html#extra-coders
+
     let jsonOptions = JsonSerializerOptions()
-    jsonOptions.Converters.Add(JsonFSharpConverter())
+    jsonOptions.Converters.Add(JsonFSharpConverter(
+        unionEncoding = ( JsonUnionEncoding.UnwrapFieldlessTags )
+    ))
     ! services.AddSingleton(jsonOptions)
     ! services.AddSingleton<Json.ISerializer, SystemTextJson.Serializer>()
+
 
     ! services.AddGiraffe()
 
@@ -65,14 +67,14 @@ let configureApp (app: IApplicationBuilder) =
         app.ApplicationServices.GetService<IWebHostEnvironment>()
 
     (match env.IsDevelopment() with
-     | true -> app.UseDeveloperExceptionPage()
-     | false ->
-         app
-             .UseGiraffeErrorHandler(Handler.errorHandler)
-             .UseHttpsRedirection())
-        .UseCors("default")
-        .UseStaticFiles()
-        .UseGiraffe(webApp)
+    | true -> app.UseDeveloperExceptionPage()
+    | false ->
+        app
+            .UseGiraffeErrorHandler(Handler.errorHandler)
+            .UseHttpsRedirection())
+       .UseCors("default")
+       .UseStaticFiles()
+       .UseGiraffe(webApp)
 
 
 let configureLogging (builder: ILoggingBuilder) = ! builder.AddConsole().AddDebug()

@@ -30,15 +30,15 @@ type HttpError = HttpStatusCode * ErrorMessage
 
 type Msg =
     | GetDateOnlyRequest
-    | GetDateOnlyResponse of Result<DateOnly, HttpError>
+    | GetDateOnlyResponse of DateOnly
     
     | GetPersonaRequest
-    | GetPersonaResponse of Result<Persona, HttpError>
+    | GetPersonaResponse of Persona
     
     | GetPbsRequest
-    | GetPbsResponse of Result<Pbs, HttpError>
+    | GetPbsResponse of Pbs
     
     | GetPbsMenuRequest
-    | GetPbsMenuResponse of Result<PbsMenu, HttpError>
+    | GetPbsMenuResponse of PbsMenu
     
     | HttpError of exn

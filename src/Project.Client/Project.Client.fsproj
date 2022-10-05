@@ -10,6 +10,7 @@
         <Content Include="package.json" />
         <Content Include="webpack.config.js" />
         <Content Include="src\style.scss" />
+        <Compile Include="src\DateOnlyCoderFe.fs" />
         <Compile Include="src\Types.fs" />
         <Compile Include="src\Router.fs" />
         <Compile Include="src\HttpRequests.fs" />
@@ -29,6 +30,8 @@
       <PackageReference Include="Fable.SimpleHttp" Version="3.5.0" />
       <PackageReference Include="Fable.SimpleJson" Version="3.24.0" />
       <PackageReference Include="Feliz" Version="1.68.0" />
+      <PackageReference Include="Thoth.Fetch" Version="3.0.1" />
+      <PackageReference Include="Thoth.Json" Version="7.0.0" />
     </ItemGroup>
 
     <ItemGroup>
